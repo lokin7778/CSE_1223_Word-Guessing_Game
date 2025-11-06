@@ -42,7 +42,7 @@ public class WordGuessing {
             String word;
             while((word = reader.readLine()) != null){
                 if(!word.isEmpty()){
-                    words.add(word);
+                    words.add(word.toUpperCase());
                 }
             }
         }
