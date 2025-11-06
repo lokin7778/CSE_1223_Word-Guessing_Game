@@ -38,8 +38,20 @@ public class WordGuessing {
     public static List<String> readWords(String fname){
         List<String> words = new ArrayList<String>();
 
+        try(BufferedReader reader = new BufferedReader(new FileReader(fname))){
+            String word;
+            while((word = reader.readLine()) != null){
+                if(!word.isEmpty()){
+                    words.add(word);
+                }
+            }
+        }
+        catch(IOException e){
+            System.out.println("ERROR: File " + fname + " not found!");
+        }
+
         return words;
-    }
+}
 
     /**
      * Takes a Random object and a list of strings and returns a random String
