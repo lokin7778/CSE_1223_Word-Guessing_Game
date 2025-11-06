@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -34,13 +35,9 @@ public class WordGuessing {
      *            the name of the file to read words from
      * @return a list of words read from the file in all uppercase letters.
      */
-    public static List<String> readWords(String fname) {
+    public static List<String> readWords(String fname){
         List<String> words = new ArrayList<String>();
-        // TODO - complete this function
 
-        // TODO - the following line is only here to allow this program to
-        //  compile.  Replace it and remove this comment when you complete
-        //  this method.
         return words;
     }
 
@@ -141,7 +138,8 @@ public class WordGuessing {
     }
 
     public static void main(String[] args) {
-        // TODO - complete this function
+        
+        System.out.println(readWords("words.txt"));
 
     }
 
