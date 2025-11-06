@@ -1,13 +1,20 @@
 /**
- * Your description here
- * @author ENTER YOUR NAME HERE
- * @version ENTER DATE HERE
+ * We read text from a text file and then prompt the user to guess a word that is in the file, if the word is correct, then exit
+ * the program. If not, display some necessary information
+ * 
+ * @author Lokesh Narasimhan
+ * @version 11/06/2025
  *
  */
+
+// import all of the necessary libraries required for the project
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class WordGuessing {
 
