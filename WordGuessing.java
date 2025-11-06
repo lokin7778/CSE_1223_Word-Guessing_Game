@@ -36,21 +36,25 @@ public class WordGuessing {
      * @return a list of words read from the file in all uppercase letters.
      */
     public static List<String> readWords(String fname){
-        List<String> words = new ArrayList<String>();
+        List<String> words = new ArrayList<String>(); // creates a list of strings
 
+        // try-block, we use a bufferedreader object to read all the contents from the text file
         try(BufferedReader reader = new BufferedReader(new FileReader(fname))){
             String word;
-            while((word = reader.readLine()) != null){
+
+            // loops until theere is nothing to read from the file, we use null here to avoid the nullPointerException if 
+            //.isEmpty() is used.
+            while((word = reader.readLine()) != null){ 
                 if(!word.isEmpty()){
-                    words.add(word.toUpperCase());
+                    words.add(word.toUpperCase()); // appends the word to the list.
                 }
             }
         }
         catch(IOException e){
-            System.out.println("ERROR: File " + fname + " not found!");
+            System.out.println("ERROR: File " + fname + " not found!"); // prints this message if the file is not found
         }
 
-        return words;
+        return words; // returns the list words
 }
 
     /**
