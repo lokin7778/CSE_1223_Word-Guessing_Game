@@ -69,11 +69,12 @@ public class WordGuessing {
      * @return an element from a random position in the list
      */
     public static String getRandomWord(Random rnd, List<String> inList) {
-        // TODO - complete this function
+        
+        rnd = new Random(); // creates a new Random object 'rnd'
+        int index = rnd.nextInt(inList.size()); // creates an int variable to hold the index of the random word
 
-        // TODO - the following line is only here to allow this program to
-        //  compile.  Replace it and remove this comment when you complete
-        //  this method.
+        String randomWord = inList.get(index); // assigns the randomWord variable the random Word 
+
         return null;
     }
 
