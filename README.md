@@ -5,3 +5,6 @@ Soln. String word;
 while((word = reader.readLine()) != null)
 
 2. Another problem I faced was the nullpointerexception, the code will crash in the end if we use .isEmpty(). So we need to use the null. 
+
+3. Another problem I faced was in the getCharacterGuess method, where I returned the char outside the else block causing an error in the code.
+Soln. I returned a null value in the if block to handle the error, and then finally returned the original return character in the else block.
