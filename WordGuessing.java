@@ -88,12 +88,14 @@ public class WordGuessing {
      * @return a StringBuilder with the same length as inWord, but all stars
      */
     public static StringBuilder starWord(String inWord) {
-        // TODO - complete this function
+        
+        StringBuilder sb = new StringBuilder(); // creates a stringbuilder object 'sb'
 
-        // TODO - the following line is only here to allow this program to
-        //  compile.  Replace it and remove this comment when you complete
-        //  this method.
-        return null;
+        int wordLen = inWord.length(); // returns the length of the string which is passed as the parameter
+
+        StringBuilder starReplaced = sb.repeat("*", wordLen); // this code repeats the '*' as many times as the length of the string.
+
+        return starReplaced;
     }
 
     /**
