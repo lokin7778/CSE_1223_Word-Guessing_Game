@@ -165,13 +165,18 @@ public class WordGuessing {
      */
     public static void modifyStarWord(char ch, String word,
             StringBuilder starWord) {
-        // TODO - complete this function
+        
+        // for-loop to iterate through the string and replace all the stars with the character
+        for (int i = 0; i < word.length(); i++){
 
+            if (word.charAt(i)==ch){
+                starWord.setCharAt(i, ch); // replaces all the stars with the specific character
+            }
+        }
     }
 
     public static void main(String[] args) {
         
-        System.out.println(readWords("words.txt"));
 
     }
 
