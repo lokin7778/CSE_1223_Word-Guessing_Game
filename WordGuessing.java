@@ -75,7 +75,7 @@ public class WordGuessing {
 
         String randomWord = inList.get(index); // assigns the randomWord variable the random Word 
 
-        return randomWord;
+        return randomWord; // returns the random word
     }
 
     /**
@@ -95,7 +95,7 @@ public class WordGuessing {
 
         StringBuilder starReplaced = sb.repeat("*", wordLen); // this code repeats the '*' as many times as the length of the string.
 
-        return starReplaced;
+        return starReplaced; // returns the star replaced sequence
     }
 
     /**
@@ -109,12 +109,20 @@ public class WordGuessing {
      * @return the uppercase value of the character typed by the user.
      */
     public static char getCharacterGuess(Scanner inScanner) {
-        // TODO - complete this function
-
-        // TODO - the following line is only here to allow this program to
-        //  compile.  Replace it and remove this comment when you complete
-        //  this method.
-        return 0;
+        
+        System.out.print("Enter a single character (non-blank): ");
+        
+        String input = inScanner.nextLine(); // Read once and store
+        
+        if (input.equals("") || input.length() > 1) {
+            System.out.println("ERROR: Enter a single character that is not null"); // error prompt
+            return '\0'; // Return null character
+        }
+        else {
+            String chr = input.toUpperCase(); // converts the input to uppercase
+            char realChr = chr.charAt(0); // extracts the char from the string
+            return realChr; // Return inside the else block
+        }
     }
 
     /**
