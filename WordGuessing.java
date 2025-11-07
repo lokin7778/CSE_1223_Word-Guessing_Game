@@ -75,7 +75,7 @@ public class WordGuessing {
 
         String randomWord = inList.get(index); // assigns the randomWord variable the random Word 
 
-        return null;
+        return randomWord;
     }
 
     /**
