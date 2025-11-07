@@ -44,11 +44,14 @@ public class WordGuessing {
 
             // loops until theere is nothing to read from the file, we use null here to avoid the nullPointerException if 
             //.isEmpty() is used.
+            int wordCount = 0; // added this variable to count the number of words in the file
             while((word = reader.readLine()) != null){ 
                 if(!word.isEmpty()){
                     words.add(word.toUpperCase()); // appends the word to the list.
+                    wordCount++;
                 }
             }
+            System.out.println("Read " + wordCount + " words from the file.");
         }
         catch(IOException e){
             System.out.println("ERROR: File " + fname + " not found!"); // prints this message if the file is not found
@@ -177,6 +180,15 @@ public class WordGuessing {
 
     public static void main(String[] args) {
         
+        Scanner in = new Scanner(System.in); // creates a scanner object
+
+        System.out.print("Enter a random seed: "); // prompts the user for input for the random seed
+        int seed = Integer.parseInt(in.nextLine()); // inputs the seed
+        
+        System.out.print("Enter a filename for your wordlist: "); 
+        String fName = in.nextLine(); // inputs the file name to read from
+
+        System.out.println(readWords(fName));
 
     }
 
