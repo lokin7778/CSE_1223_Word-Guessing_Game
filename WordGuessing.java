@@ -188,8 +188,7 @@ public class WordGuessing {
         System.out.print("Enter a filename for your wordlist: "); 
         String fName = in.nextLine(); // inputs the file name to read from
 
-        System.out.println(readWords(fName));
-
+        List<String> word = readWords(fName); // calls the readWords method and stores the returned list in a variable word.
     }
 
 }
