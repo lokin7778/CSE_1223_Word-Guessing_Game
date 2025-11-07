@@ -136,12 +136,17 @@ public class WordGuessing {
      *         String word
      */
     public static int charCount(char ch, String word) {
-        // TODO - complete this function
+        
+        int count = 0; // initializes a count variable to keep track of the number of times a character repeats
 
-        // TODO - the following line is only here to allow this program to
-        //  compile.  Replace it and remove this comment when you complete
-        //  this method.
-        return 0;
+        for(int i = 0; i < word.length(); i++){
+
+            if(word.charAt(i) == ch){
+                count++;
+            }
+        }
+
+        return count;
     }
 
     /**
