@@ -223,20 +223,15 @@ public class WordGuessing {
                 StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
                 System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
 
-                
-                char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
-
                 ArrayList<Character> nullGuesses = new ArrayList<>();
 
                 // prints out an empty list if the user has gueesed zero characters
                 if (noOfGuesses==1) {
                     System.out.println("Previous characters guessed: " + nullGuesses);
                 }
-
-                // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.        
-                ArrayList<Character> noOfGuess = charGuessed(guess);
-                System.out.println("Previous characters guessed : " + noOfGuess);
-
+                   
+                char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
+                
                 int count = charCount(guess, randomWord);
                 System.out.println("The character " + guess + " occurs in " + count + " positions");
 
@@ -245,13 +240,21 @@ public class WordGuessing {
                 modifyStarWord(guess, randomWord, starredWord); // calls the modifyStarWord method to change the starred word after the guess.
 
                 System.out.println("The word to guess is: " + starredWord);
+
+                if(noOfGuesses>1){
+
+                // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.
+                ArrayList<Character> noOfGuess = charGuessed(guess);
+                System.out.println("Previous characters guessed : " + noOfGuess);
+
+                }
                 
                 System.out.print("Enter your guess for the word: ");
                 String guessWord = in.nextLine();
 
                 if (!guessWord.equalsIgnoreCase(randomWord)) {
                     System.out.println("This is not the word.");
-                    noOfGuesses++;
+                    System.out.println();
                 } 
                 else {
                     System.out.println("Yes! " + randomWord + " is the correct word!");
