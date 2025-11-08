@@ -197,8 +197,8 @@ public class WordGuessing {
             List<String> word = readWords(fName); // calls the readWords method and stores the returned list in a variable word.
 
             String randomWord = getRandomWord(null, word); // calls the getRandomWord method which chooses a random word from the list.
-
-            boolean isGuessed = false;
+            System.out.println(randomWord);
+            boolean isGuessed = true;
 
             while (isGuessed) {
                 
@@ -221,7 +221,7 @@ public class WordGuessing {
                 System.out.print("Enter your guess for the word: ");
                 String guessWord = in.nextLine();
 
-                if (!guessWord.equals(randomWord)) {
+                if (!guessWord.equalsIgnoreCase(randomWord)) {
                     System.out.println("This is not the word.");
                     noOfGuesses++;
                 } 
