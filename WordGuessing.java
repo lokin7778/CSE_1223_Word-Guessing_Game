@@ -189,6 +189,8 @@ public class WordGuessing {
         String fName = in.nextLine(); // inputs the file name to read from
 
         List<String> word = readWords(fName); // calls the readWords method and stores the returned list in a variable word.
+
+        String randomWord = getRandomWord(null, word); // calls the getRandomWord method which chooses a random word from the list.
     }
 
 }
