@@ -181,7 +181,6 @@ public class WordGuessing {
     public static void main(String[] args) {
 
         boolean isGuessed = true;
-        int noOfRuns = 0;
         ArrayList<Character> charGuessed = new ArrayList<>();
 
         while(isGuessed){
@@ -205,7 +204,18 @@ public class WordGuessing {
 
             char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
 
+            // for-loop to iterate through the word to check if the guessed character is present in the word and print out in how many positions it occurs
+            int positions = 0;
+            for(int i = 0; i<randomWord.length(); i++){
+
+                if (randomWord.charAt(i)==guess) {
+                    positions++;
+                }
+            }
             
+            System.out.println("The character " + guess + " occurs in " + positions + " positions.");
+
+            isGuessed = false;
         }
         
     }
