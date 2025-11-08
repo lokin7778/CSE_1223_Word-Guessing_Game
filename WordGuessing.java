@@ -183,12 +183,13 @@ public class WordGuessing {
         boolean isGuessed = true;
         ArrayList<Character> charGuessed = new ArrayList<>();
 
+        int noOfGuesses = 1;
+        Scanner in = new Scanner(System.in); // creates a scanner object
+
+        System.out.print("Enter a random seed: "); // prompts the user for input for the random seed
+        int seed = Integer.parseInt(in.nextLine()); // inputs the seed
+
         while(isGuessed){
-
-            Scanner in = new Scanner(System.in); // creates a scanner object
-
-            System.out.print("Enter a random seed: "); // prompts the user for input for the random seed
-            int seed = Integer.parseInt(in.nextLine()); // inputs the seed
             
             System.out.print("Enter a filename for your wordlist: "); 
             String fName = in.nextLine(); // inputs the file name to read from
@@ -213,6 +214,32 @@ public class WordGuessing {
 
             System.out.println("The word to guess is: " + starredWord);
             
+            System.out.println("Enter your guess for the word: ");
+            String guessWord = in.nextLine();
+
+            if (!guessWord.equals(randomWord)) {
+                System.out.println("This is not the word.");
+                noOfGuesses++;
+            } else {
+                System.out.println("Yes! " + randomWord + " is the correct word!");
+                System.out.println();
+                System.out.println("That took you " + noOfGuesses + " guesses");
+
+                System.out.print("Would you like a rematch [Y/N]?: ");
+                String doCont = in.nextLine();
+
+                if (doCont.equals("N")) {
+                    System.out.println();
+                    System.out.println("Goodbye!");
+                    isGuessed = false;
+                }
+                else if(doCont.equals("Y")){
+                    continue;
+                }
+                else{
+                    System.out.println("Please enter only a Y or an N.");
+                }
+            }
         }
         
     }
