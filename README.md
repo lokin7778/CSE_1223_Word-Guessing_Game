@@ -8,3 +8,6 @@ while((word = reader.readLine()) != null)
 
 3. Another problem I faced was in the getCharacterGuess method, where I returned the char outside the else block causing an error in the code.
 Soln. I returned a null value in the if block to handle the error, and then finally returned the original return character in the else block.
+
+4. ONE More problem I am facing is that I am not able to append the guessed characters to the arraylist and show what are the guessed characters. 
+Soln. I am creating a new method which takes in a guess paramater and appends it to the arraylist and returns the arraylist.
