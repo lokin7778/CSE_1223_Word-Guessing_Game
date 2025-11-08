@@ -11,3 +11,5 @@ Soln. I returned a null value in the if block to handle the error, and then fina
 
 4. ONE More problem I am facing is that I am not able to append the guessed characters to the arraylist and show what are the guessed characters. 
 Soln. I am creating a new method which takes in a guess paramater and appends it to the arraylist and returns the arraylist.
+
+5. One more fault which I found in the program is that while displaying the guesses arraylist is not functioning properly. On every iteration, it should display the previous characters guessed. But in my version, everytime it returns an empty arraylist. 
