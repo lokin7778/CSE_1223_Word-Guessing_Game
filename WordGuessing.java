@@ -209,7 +209,10 @@ public class WordGuessing {
 
             System.out.println(); // clears the output 
 
-            isGuessed = false;
+            modifyStarWord(guess, randomWord, starredWord); // calls the modifyStarWord method to change the starred word after the guess.
+
+            System.out.println("The word to guess is: " + starredWord);
+            
         }
         
     }
