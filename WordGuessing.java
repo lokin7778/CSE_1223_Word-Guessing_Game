@@ -186,13 +186,20 @@ public class WordGuessing {
      */
     public static ArrayList<Character> charGuessed(char guess)
     {
+        ArrayList<Character> listOfguessed = new ArrayList<>();
+        listOfguessed.add(guess);
 
+        if (listOfguessed.size() == 0) {
+            return listOfguessed;
+        }
+        else{
+            return listOfguessed;
+        }
     }
 
     public static void main(String[] args) {
 
         boolean okContinue = true;
-        ArrayList<Character> charGuessed = new ArrayList<>();
 
         int noOfGuesses = 1;
         Scanner in = new Scanner(System.in); // creates a scanner object
@@ -216,9 +223,18 @@ public class WordGuessing {
                 StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
                 System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
 
-                System.out.println("Previous character guessed: " + charGuessed); // prints the characters that were previously guessed in the form of an arraylist.
+                ArrayList<Character> nullGuesses = new ArrayList<>();
+
+                // prints out an empty list if the user has gueesed zero characters
+                if (noOfGuesses==1) {
+                    System.out.println("Previous characters guessed: " + nullGuesses);
+                }
 
                 char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
+
+                // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.  
+                ArrayList<Character> noOfGuess = charGuessed(guess);
+                System.out.println("Previous characters guessed : " + noOfGuess);
 
                 int count = charCount(guess, randomWord);
                 System.out.println("The character " + guess + " occurs in " + count + " positions");
