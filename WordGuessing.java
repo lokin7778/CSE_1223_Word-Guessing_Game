@@ -177,6 +177,17 @@ public class WordGuessing {
             }
         }
     }
+ 
+    /*
+     * This method takes in a character guess as the parameter and then appends it to an Arraylist which will hold the previous guesses of the user and returns that arraylist.
+     * 
+     * @param - guess (the guess of the user)
+     * @return - arraylist of the guesses done by the user
+     */
+    public static ArrayList<Character> charGuessed(char guess)
+    {
+
+    }
 
     public static void main(String[] args) {
 
