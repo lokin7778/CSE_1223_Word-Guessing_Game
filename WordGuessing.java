@@ -223,6 +223,9 @@ public class WordGuessing {
                 StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
                 System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
 
+                
+                char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
+
                 ArrayList<Character> nullGuesses = new ArrayList<>();
 
                 // prints out an empty list if the user has gueesed zero characters
@@ -230,9 +233,7 @@ public class WordGuessing {
                     System.out.println("Previous characters guessed: " + nullGuesses);
                 }
 
-                char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
-
-                // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.  
+                // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.        
                 ArrayList<Character> noOfGuess = charGuessed(guess);
                 System.out.println("Previous characters guessed : " + noOfGuess);
 
