@@ -180,7 +180,7 @@ public class WordGuessing {
 
     public static void main(String[] args) {
 
-        boolean isGuessed = true;
+        boolean okContinue = true;
         ArrayList<Character> charGuessed = new ArrayList<>();
 
         int noOfGuesses = 1;
@@ -189,7 +189,7 @@ public class WordGuessing {
         System.out.print("Enter a random seed: "); // prompts the user for input for the random seed
         int seed = Integer.parseInt(in.nextLine()); // inputs the seed
 
-        while(isGuessed){
+        while(okContinue){
             
             System.out.print("Enter a filename for your wordlist: "); 
             String fName = in.nextLine(); // inputs the file name to read from
@@ -198,48 +198,56 @@ public class WordGuessing {
 
             String randomWord = getRandomWord(null, word); // calls the getRandomWord method which chooses a random word from the list.
 
-            StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
-            System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
+            boolean isGuessed = false;
 
-            System.out.println("Previous character guessed: " + charGuessed); // prints the characters that were previously guessed in the form of an arraylist.
+            while (isGuessed) {
+                
+                StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
+                System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
 
-            char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
+                System.out.println("Previous character guessed: " + charGuessed); // prints the characters that were previously guessed in the form of an arraylist.
 
-            int count = charCount(guess, randomWord);
-            System.out.println("The character " + guess + " occurs in " + count + " positions");
+                char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
 
-            System.out.println(); // clears the output 
+                int count = charCount(guess, randomWord);
+                System.out.println("The character " + guess + " occurs in " + count + " positions");
 
-            modifyStarWord(guess, randomWord, starredWord); // calls the modifyStarWord method to change the starred word after the guess.
+                System.out.println(); // clears the output 
 
-            System.out.println("The word to guess is: " + starredWord);
-            
-            System.out.println("Enter your guess for the word: ");
-            String guessWord = in.nextLine();
+                modifyStarWord(guess, randomWord, starredWord); // calls the modifyStarWord method to change the starred word after the guess.
 
-            if (!guessWord.equals(randomWord)) {
-                System.out.println("This is not the word.");
-                noOfGuesses++;
-            } else {
-                System.out.println("Yes! " + randomWord + " is the correct word!");
-                System.out.println();
-                System.out.println("That took you " + noOfGuesses + " guesses");
+                System.out.println("The word to guess is: " + starredWord);
+                
+                System.out.print("Enter your guess for the word: ");
+                String guessWord = in.nextLine();
 
-                System.out.print("Would you like a rematch [Y/N]?: ");
-                String doCont = in.nextLine();
-
-                if (doCont.equals("N")) {
+                if (!guessWord.equals(randomWord)) {
+                    System.out.println("This is not the word.");
+                    noOfGuesses++;
+                } 
+                else {
+                    System.out.println("Yes! " + randomWord + " is the correct word!");
                     System.out.println();
-                    System.out.println("Goodbye!");
-                    isGuessed = false;
-                }
-                else if(doCont.equals("Y")){
-                    continue;
-                }
-                else{
-                    System.out.println("Please enter only a Y or an N.");
+                    System.out.println("That took you " + noOfGuesses + " guesses");
+
+                    System.out.print("Would you like a rematch [Y/N]?: ");
+                    String doCont = in.nextLine();
+
+                    if (doCont.equals("N")) {
+                        System.out.println();
+                        System.out.println("Goodbye!");
+                        okContinue = false;
+                        isGuessed = false;
+                    }
+                    else if(doCont.equals("Y")){
+                        continue;
+                    }
+                    else{
+                        System.out.println("Please enter only a Y or an N.");
+                    }
                 }
             }
+            
         }
         
     }
