@@ -191,6 +191,9 @@ public class WordGuessing {
         List<String> word = readWords(fName); // calls the readWords method and stores the returned list in a variable word.
 
         String randomWord = getRandomWord(null, word); // calls the getRandomWord method which chooses a random word from the list.
+
+        StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
+        System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
     }
 
 }
