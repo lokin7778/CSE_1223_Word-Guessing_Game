@@ -113,7 +113,7 @@ public class WordGuessing {
      */
     public static char getCharacterGuess(Scanner inScanner) {
         
-        System.out.print("Enter a single character (non-blank): ");
+        System.out.print("Enter a character to guess: ");
         
         String input = inScanner.nextLine(); // Read once and store
         
@@ -179,21 +179,35 @@ public class WordGuessing {
     }
 
     public static void main(String[] args) {
+
+        boolean isGuessed = true;
+        int noOfRuns = 0;
+        ArrayList<Character> charGuessed = new ArrayList<>();
+
+        while(isGuessed){
+
+            Scanner in = new Scanner(System.in); // creates a scanner object
+
+            System.out.print("Enter a random seed: "); // prompts the user for input for the random seed
+            int seed = Integer.parseInt(in.nextLine()); // inputs the seed
+            
+            System.out.print("Enter a filename for your wordlist: "); 
+            String fName = in.nextLine(); // inputs the file name to read from
+
+            List<String> word = readWords(fName); // calls the readWords method and stores the returned list in a variable word.
+
+            String randomWord = getRandomWord(null, word); // calls the getRandomWord method which chooses a random word from the list.
+
+            StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
+            System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
+
+            System.out.println("Previous character guessed: " + charGuessed); // prints the characters that were previously guessed in the form of an arraylist.
+
+            char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
+
+            
+        }
         
-        Scanner in = new Scanner(System.in); // creates a scanner object
-
-        System.out.print("Enter a random seed: "); // prompts the user for input for the random seed
-        int seed = Integer.parseInt(in.nextLine()); // inputs the seed
-        
-        System.out.print("Enter a filename for your wordlist: "); 
-        String fName = in.nextLine(); // inputs the file name to read from
-
-        List<String> word = readWords(fName); // calls the readWords method and stores the returned list in a variable word.
-
-        String randomWord = getRandomWord(null, word); // calls the getRandomWord method which chooses a random word from the list.
-
-        StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
-        System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
     }
 
 }
