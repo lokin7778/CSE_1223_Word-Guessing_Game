@@ -83,11 +83,16 @@ public class WordGuessing {
      * @return a StringBuilder with the same length as inWord, but all stars
      */
     public static StringBuilder starWord(String inWord) {
-        StringBuilder sb = new StringBuilder(); // creates a stringbuilder object 'sb'
-        int wordLen = inWord.length(); // returns the length of the string which is passed as the parameter
-        StringBuilder starReplaced = sb.repeat("*", wordLen); // this code repeats the '*' as many times as the length of the string.
-        return starReplaced; // returns the star replaced sequence
+    StringBuilder sb = new StringBuilder(); // creates a stringbuilder object 'sb'
+    int wordLen = inWord.length(); // returns the length of the string which is passed as the parameter
+    
+    // Use a loop instead of repeat() for compatibility
+    for(int i = 0; i < wordLen; i++) {
+        sb.append("*");
     }
+    
+    return sb; // returns the star replaced sequence
+}
 
     /**
      * Prompts the user to enter a single character. If the user enters a blank
@@ -105,7 +110,7 @@ public class WordGuessing {
             String input = inScanner.nextLine(); // Read once and store
             
             if (input.equals("") || input.length() > 1) {
-                System.out.println("ERROR: Enter a single character that is not null"); // error prompt
+                System.out.println("Enter only a single character!"); // error prompt
             }
             else {
                 String chr = input.toUpperCase(); // converts the input to uppercase
