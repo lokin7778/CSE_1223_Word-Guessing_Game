@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -42,23 +41,20 @@ public class WordGuessing {
         try(BufferedReader reader = new BufferedReader(new FileReader(fname))){
             String word;
 
-            // loops until theere is nothing to read from the file, we use null here to avoid the nullPointerException if 
-            //.isEmpty() is used.
-            int wordCount = 0; // added this variable to count the number of words in the file
+            // loops until there is nothing to read from the file
             while((word = reader.readLine()) != null){ 
                 if(!word.isEmpty()){
                     words.add(word.toUpperCase()); // appends the word to the list.
-                    wordCount++;
                 }
             }
-            System.out.println("Read " + wordCount + " words from the file.");
+            System.out.println("Read " + words.size() + " words from the file.");
         }
         catch(IOException e){
             System.out.println("ERROR: File " + fname + " not found!"); // prints this message if the file is not found
         }
 
         return words; // returns the list words
-}
+    }
 
     /**
      * Takes a Random object and a list of strings and returns a random String
@@ -72,12 +68,8 @@ public class WordGuessing {
      * @return an element from a random position in the list
      */
     public static String getRandomWord(Random rnd, List<String> inList) {
-        
-        rnd = new Random(); // creates a new Random object 'rnd'
         int index = rnd.nextInt(inList.size()); // creates an int variable to hold the index of the random word
-
         String randomWord = inList.get(index); // assigns the randomWord variable the random Word 
-
         return randomWord; // returns the random word
     }
 
@@ -91,13 +83,9 @@ public class WordGuessing {
      * @return a StringBuilder with the same length as inWord, but all stars
      */
     public static StringBuilder starWord(String inWord) {
-        
         StringBuilder sb = new StringBuilder(); // creates a stringbuilder object 'sb'
-
         int wordLen = inWord.length(); // returns the length of the string which is passed as the parameter
-
         StringBuilder starReplaced = sb.repeat("*", wordLen); // this code repeats the '*' as many times as the length of the string.
-
         return starReplaced; // returns the star replaced sequence
     }
 
@@ -112,19 +100,18 @@ public class WordGuessing {
      * @return the uppercase value of the character typed by the user.
      */
     public static char getCharacterGuess(Scanner inScanner) {
-        
-        System.out.print("Enter a character to guess: ");
-        
-        String input = inScanner.nextLine(); // Read once and store
-        
-        if (input.equals("") || input.length() > 1) {
-            System.out.println("ERROR: Enter a single character that is not null"); // error prompt
-            return '\0'; // Return null character
-        }
-        else {
-            String chr = input.toUpperCase(); // converts the input to uppercase
-            char realChr = chr.charAt(0); // extracts the char from the string
-            return realChr; // Return inside the else block
+        while(true) {
+            System.out.print("Enter a character to guess: ");
+            String input = inScanner.nextLine(); // Read once and store
+            
+            if (input.equals("") || input.length() > 1) {
+                System.out.println("ERROR: Enter a single character that is not null"); // error prompt
+            }
+            else {
+                String chr = input.toUpperCase(); // converts the input to uppercase
+                char realChr = chr.charAt(0); // extracts the char from the string
+                return realChr; // Return inside the else block
+            }
         }
     }
 
@@ -139,11 +126,9 @@ public class WordGuessing {
      *         String word
      */
     public static int charCount(char ch, String word) {
-        
         int count = 0; // initializes a count variable to keep track of the number of times a character repeats
 
         for(int i = 0; i < word.length(); i++){
-
             if(word.charAt(i) == ch){
                 count++;
             }
@@ -166,119 +151,122 @@ public class WordGuessing {
      * @param starWord
      *            the StringBuilder containing the full word masked by stars.
      */
-    public static void modifyStarWord(char ch, String word,
-            StringBuilder starWord) {
-        
+    public static void modifyStarWord(char ch, String word, StringBuilder starWord) {
         // for-loop to iterate through the string and replace all the stars with the character
         for (int i = 0; i < word.length(); i++){
-
             if (word.charAt(i)==ch){
                 starWord.setCharAt(i, ch); // replaces all the stars with the specific character
             }
         }
     }
  
-    /*
-     * This method takes in a character guess as the parameter and then appends it to an Arraylist which will hold the previous guesses of the user and returns that arraylist.
+    /**
+     * Checks if the character has already been guessed by looking through the list
+     * of previously guessed characters.
      * 
-     * @param - guess (the guess of the user)
-     * @return - arraylist of the guesses done by the user
+     * @param guessedList - the list of previously guessed characters
+     * @param guess - the character to check
+     * @return true if character has been guessed before, false otherwise
      */
-    public static ArrayList<Character> charGuessed(ArrayList<Character> arrList, char guess)
-    {
-        arrList.add(guess);
-
-        return arrList;
+    public static boolean isAlreadyGuessed(ArrayList<Character> guessedList, char guess) {
+        return guessedList.contains(guess);
+    }
+    
+    /**
+     * Handles the rematch prompt and validates user input.
+     * Only accepts 'Y', 'y', 'N', or 'n' as valid inputs.
+     * 
+     * @param inScanner - Scanner object to read user input
+     * @return true if user wants a rematch (Y/y), false if not (N/n)
+     */
+    public static boolean askForRematch(Scanner inScanner) {
+        while(true) {
+            System.out.print("Would you like a rematch [Y/N]?: ");
+            String response = inScanner.nextLine();
+            
+            if(response.equalsIgnoreCase("Y")) {
+                return true;
+            }
+            else if(response.equalsIgnoreCase("N")) {
+                return false;
+            }
+            else {
+                System.out.println("Please enter only a Y or an N.");
+            }
+        }
     }
 
     public static void main(String[] args) {
-
-        boolean okContinue = true;
-
-        int noOfGuesses = 1;
         Scanner in = new Scanner(System.in); // creates a scanner object
 
         System.out.print("Enter a random seed: "); // prompts the user for input for the random seed
         int seed = Integer.parseInt(in.nextLine()); // inputs the seed
+        Random rnd = new Random(seed); // create Random object with seed
 
-        while(okContinue){
-            
-            System.out.print("Enter a filename for your wordlist: "); 
-            String fName = in.nextLine(); // inputs the file name to read from
+        System.out.print("Enter a filename for your wordlist: "); 
+        String fName = in.nextLine(); // inputs the file name to read from
 
-            List<String> word = readWords(fName); // calls the readWords method and stores the returned list in a variable word.
+        List<String> words = readWords(fName); // calls the readWords method and stores the returned list
+        
+        // Check if file reading failed or no words were read
+        if(words.isEmpty()) {
+            System.out.println("No words read - exiting program!");
+            System.out.println("Goodbye!");
+            return;
+        }
 
-            String randomWord = getRandomWord(null, word); // calls the getRandomWord method which chooses a random word from the list.
-            System.out.println(randomWord);
-            boolean isGuessed = true;
+        boolean playAgain = true;
 
-            ArrayList<Character> arrlist = new ArrayList<>();
+        while(playAgain) {
+            String randomWord = getRandomWord(rnd, words); // calls the getRandomWord method
+            StringBuilder starredWord = starWord(randomWord); // calls the starWord method
+            ArrayList<Character> guessedChars = new ArrayList<>();
+            int noOfGuesses = 0;
+            boolean wordGuessed = false;
 
-            while (isGuessed) {
-                
-                StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
+            while (!wordGuessed) {
                 System.out.println("The word to guess is: " + starredWord); // prints out the starred word.
-
-                ArrayList<Character> nullGuesses = new ArrayList<>();
-
-                // prints out an empty list if the user has gueesed zero characters
-                if (noOfGuesses==1) {
-                    System.out.println("Previous characters guessed: " + nullGuesses);
+                System.out.println("Previous characters guessed: " + guessedChars);
+                
+                char guess = getCharacterGuess(in); // calls the getCharacterGuess method
+                
+                // Check if character was already guessed
+                if(isAlreadyGuessed(guessedChars, guess)) {
+                    System.out.println("You've already guessed " + guess + ". Try another character");
+                    System.out.println();
+                    continue; // Skip the rest and ask for another character
                 }
-                   
-                char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
+                
+                // Add the guess to the list
+                guessedChars.add(guess);
                 noOfGuesses++;
-                // ArrayList<Character> noOfGuess = charGuessed(guess);
                 
                 int count = charCount(guess, randomWord);
-                System.out.println("The character " + guess + " occurs in " + count + " positions");
+                System.out.println("The character " + guess + " occurs in " + count + " positions.");
+                System.out.println();
 
-                System.out.println(); // clears the output 
-
-                modifyStarWord(guess, randomWord, starredWord); // calls the modifyStarWord method to change the starred word after the guess.
+                modifyStarWord(guess, randomWord, starredWord); // calls the modifyStarWord method
 
                 System.out.println("The word to guess is: " + starredWord);
-
-                if(noOfGuesses>1){
-
-                    // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.
-                    ArrayList<Character> noOfGuess = charGuessed(arrlist, guess);
-                    System.out.println("Previous characters guessed : " + noOfGuess);
-
-                }
-                
                 System.out.print("Enter your guess for the word: ");
                 String guessWord = in.nextLine();
 
                 if (!guessWord.equalsIgnoreCase(randomWord)) {
-                    System.out.println("This is not the word.");
+                    System.out.println("That is not the word.");
                     System.out.println();
                 } 
                 else {
                     System.out.println("Yes! " + randomWord + " is the correct word!");
                     System.out.println();
-                    System.out.println("That took you " + noOfGuesses + " guesses");
-
-                    System.out.print("Would you like a rematch [Y/N]?: ");
-                    String doCont = in.nextLine();
-
-                    if (doCont.equals("N")) {
-                        System.out.println();
-                        System.out.println("Goodbye!");
-                        okContinue = false;
-                        isGuessed = false;
-                    }
-                    else if(doCont.equals("Y")){
-                        continue;
-                    }
-                    else{
-                        System.out.println("Please enter only a Y or an N.");
-                    }
+                    System.out.println("That took you " + noOfGuesses + " guesses.");
+                    wordGuessed = true;
+                    
+                    playAgain = askForRematch(in);
+                    System.out.println();
                 }
             }
-            
         }
         
+        System.out.println("Goodbye!");
     }
-
 }
