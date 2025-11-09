@@ -184,17 +184,11 @@ public class WordGuessing {
      * @param - guess (the guess of the user)
      * @return - arraylist of the guesses done by the user
      */
-    public static ArrayList<Character> charGuessed(char guess)
+    public static ArrayList<Character> charGuessed(ArrayList<Character> arrList, char guess)
     {
-        ArrayList<Character> listOfguessed = new ArrayList<>();
-        listOfguessed.add(guess);
+        arrList.add(guess);
 
-        if (listOfguessed.size() == 0) {
-            return listOfguessed;
-        }
-        else{
-            return listOfguessed;
-        }
+        return arrList;
     }
 
     public static void main(String[] args) {
@@ -218,6 +212,8 @@ public class WordGuessing {
             System.out.println(randomWord);
             boolean isGuessed = true;
 
+            ArrayList<Character> arrlist = new ArrayList<>();
+
             while (isGuessed) {
                 
                 StringBuilder starredWord = starWord(randomWord); // calls the starWord method which returns a stringbuilder of starred word.
@@ -231,8 +227,8 @@ public class WordGuessing {
                 }
                    
                 char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
-
-                ArrayList<Character> noOfGuess = charGuessed(guess);
+                noOfGuesses++;
+                // ArrayList<Character> noOfGuess = charGuessed(guess);
                 
                 int count = charCount(guess, randomWord);
                 System.out.println("The character " + guess + " occurs in " + count + " positions");
@@ -245,9 +241,9 @@ public class WordGuessing {
 
                 if(noOfGuesses>1){
 
-                // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.
-
-                System.out.println("Previous characters guessed : " + noOfGuess);
+                    // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.
+                    ArrayList<Character> noOfGuess = charGuessed(arrlist, guess);
+                    System.out.println("Previous characters guessed : " + noOfGuess);
 
                 }
                 
