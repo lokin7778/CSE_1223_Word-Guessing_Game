@@ -231,6 +231,8 @@ public class WordGuessing {
                 }
                    
                 char guess = getCharacterGuess(in); // calls the getCharacterGuess method to input the user's character guess.
+
+                ArrayList<Character> noOfGuess = charGuessed(guess);
                 
                 int count = charCount(guess, randomWord);
                 System.out.println("The character " + guess + " occurs in " + count + " positions");
@@ -244,7 +246,7 @@ public class WordGuessing {
                 if(noOfGuesses>1){
 
                 // calls the charGuessed method and stores the returned arraylist in a variable noOfGuess and prints out the list.
-                ArrayList<Character> noOfGuess = charGuessed(guess);
+
                 System.out.println("Previous characters guessed : " + noOfGuess);
 
                 }
